@@ -59,10 +59,6 @@
                     <x-nav-link :href="route('login')">
                         {{ __('Log In') }}
                     </x-nav-link>
-
-                    <x-nav-link :href="route('register')">
-                        {{ __('Register') }}
-                    </x-nav-link>
                 @endauth
             </div>
 
@@ -117,10 +113,6 @@
             @else
                 <x-responsive-nav-link :href="route('login')">
                     {{ __('Log In') }}
-                </x-responsive-nav-link>
-
-                <x-responsive-nav-link :href="route('register')">
-                    {{ __('Register') }}
                 </x-responsive-nav-link>
             @endauth
         </div>
