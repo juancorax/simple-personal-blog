@@ -12,6 +12,21 @@
                     {{ $article->full_text }}
                 </div>
             </div>
+
+            <div class="mt-4 flex items-center gap-4">
+                <a href="{{ route('articles.edit', $article) }}">
+                    <x-primary-button>{{ __('Edit') }}</x-primary-button>
+                </a>
+
+                <form method="POST" action="{{ route('articles.destroy', $article) }}">
+                    @csrf
+                    @method('delete')
+
+                    <x-danger-button
+                        onclick="return confirm('Are you sure you want to delete this article?');">{{ __('Delete') }}</x-danger-button>
+                </form>
+            </div>
         </div>
     </div>
+
 </x-app-layout>
