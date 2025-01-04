@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreArticleRequest;
 use App\Models\Article;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
@@ -30,12 +30,9 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(StoreArticleRequest $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'full_text' => 'required|string',
-        ]);
+        $validated = $request->validated();
 
         $article = Article::create($validated);
 
@@ -61,12 +58,9 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Article $article): RedirectResponse
+    public function update(StoreArticleRequest $request, Article $article): RedirectResponse
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'full_text' => 'required|string',
-        ]);
+        $validated = $request->validated();
 
         $article->update($validated);
 
