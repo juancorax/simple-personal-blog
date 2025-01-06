@@ -5,9 +5,11 @@
                 {{ __('Articles') }}
             </h2>
 
-            <a href="{{ route('articles.create') }}">
-                <x-primary-button>{{ __('Create Article') }}</x-primary-button>
-            </a>
+            @auth
+                <a href="{{ route('articles.create') }}">
+                    <x-primary-button>{{ __('Create Article') }}</x-primary-button>
+                </a>
+            @endauth
         </div>
     </x-slot>
 

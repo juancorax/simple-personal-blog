@@ -6,6 +6,8 @@ use App\Http\Requests\StoreArticleRequest;
 use App\Models\Article;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ArticleController extends Controller
 {
@@ -34,7 +36,7 @@ class ArticleController extends Controller
     {
         $validated = $request->validated();
 
-        $article = Article::create($validated);
+        $article = Auth::user()->articles()->create($validated);
 
         return redirect(route('articles.show', $article));
     }
@@ -52,6 +54,8 @@ class ArticleController extends Controller
      */
     public function edit(Article $article): View
     {
+        Gate::authorize('update', $article);
+
         return view('articles.edit', compact('article'));
     }
 
@@ -60,6 +64,8 @@ class ArticleController extends Controller
      */
     public function update(StoreArticleRequest $request, Article $article): RedirectResponse
     {
+        Gate::authorize('update', $article);
+
         $validated = $request->validated();
 
         $article->update($validated);
@@ -72,6 +78,8 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article): RedirectResponse
     {
+        Gate::authorize('delete', $article);
+
         $article->delete();
 
         return redirect(route('articles.index'));
