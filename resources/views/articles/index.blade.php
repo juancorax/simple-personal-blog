@@ -25,8 +25,14 @@
                 @foreach ($articles as $article)
                     <a href="{{ route('articles.show', $article) }}">
                         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg {{ $loop->last ? '' : 'mb-4' }}">
-                            <div class="p-6 text-gray-900">
-                                {{ $article->title }}
+                            <div class="flex justify-between items-center">
+                                <div class="p-6 text-gray-900">
+                                    {{ $article->title }}
+                                </div>
+
+                                <div class="p-6 text-gray-500">
+                                    {{ $article->category->name }}
+                                </div>
                             </div>
                         </div>
                     </a>

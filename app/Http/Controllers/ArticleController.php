@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreArticleRequest;
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,7 @@ class ArticleController extends Controller
      */
     public function index(): View
     {
-        $articles = Article::latest()->paginate(5);
+        $articles = Article::with('category')->latest()->paginate(5);
 
         return view('articles.index', compact('articles'));
     }
@@ -26,7 +27,9 @@ class ArticleController extends Controller
      */
     public function create(): View
     {
-        return view('articles.create');
+        $categories = Category::all();
+
+        return view('articles.create', compact('categories'));
     }
 
     /**
@@ -56,7 +59,9 @@ class ArticleController extends Controller
     {
         Gate::authorize('update', $article);
 
-        return view('articles.edit', compact('article'));
+        $categories = Category::all();
+
+        return view('articles.edit', compact('article', 'categories'));
     }
 
     /**

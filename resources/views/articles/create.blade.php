@@ -20,6 +20,17 @@
                     class="block border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">{{ old('full_text') }}</textarea>
                 <x-input-error :messages="$errors->get('full_text')" class="mt-2" />
 
+                <label for="category_id">Category:</label>
+                <select name="category_id" id="category_id" class="block">
+                    <option value="">--- Select Category ---</option>
+
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}" @if ($category->id == old('category_id')) selected @endif>
+                            {{ $category->name }}</option>
+                    @endforeach
+                </select>
+                <x-input-error :messages="$errors->get('category_id')" class="mt-2" />
+
                 <x-primary-button class="mt-4">{{ __('Create') }}</x-primary-button>
             </form>
         </div>
