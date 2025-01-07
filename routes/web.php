@@ -17,4 +17,6 @@ Route::middleware('auth')->group(function () {
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
 Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
 
+Route::view('/about', 'about')->name('about');
+
 require __DIR__.'/auth.php';
